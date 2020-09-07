@@ -5,7 +5,8 @@ spring:
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
   flyway:
-    enabled: false
+    enabled: true
     user: root
     password: password
     locations: classpath:db/migration
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/blog

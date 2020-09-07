@@ -10,4 +10,5 @@ public class ErrorResponse {
     private HttpStatus httpStatus;
     private String message;
     private Long timestamp;
+    private String name;
 }
