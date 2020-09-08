@@ -23,3 +23,6 @@ db/up:
 
 db/bash:
 	docker exec -ti blog_db bash
+
+mysql:
+	docker exec -ti blog_db mysql -u root -p blog
