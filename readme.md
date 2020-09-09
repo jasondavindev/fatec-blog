@@ -1,5 +1,7 @@
 # Fatec Blog
 - Jason Carneiro
+- Marcos Toledo
+- Nicolas Fujisawa
 
 ## Rodando a aplicação
 
