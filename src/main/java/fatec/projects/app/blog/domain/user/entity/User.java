@@ -2,6 +2,7 @@ package fatec.projects.app.blog.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
+import fatec.projects.app.blog.domain.comment.entity.Comment;
 import fatec.projects.app.blog.domain.post.entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,4 +34,7 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Post> posts;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Comment> comments;
 }
