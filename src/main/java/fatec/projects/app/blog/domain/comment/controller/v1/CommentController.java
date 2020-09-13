@@ -5,21 +5,33 @@ import fatec.projects.app.blog.domain.comment.controller.v1.request.CommentReque
 import fatec.projects.app.blog.domain.comment.controller.v1.response.CommentResponse;
 import fatec.projects.app.blog.domain.comment.entity.Comment;
 import fatec.projects.app.blog.domain.comment.service.CommentService;
+import fatec.projects.app.blog.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/v1/comments")
+@RequestMapping("/v1/posts/{postId}/comments")
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService commentService;
+    private final PostService postService;
 
     @PostMapping
-    public CommentResponse create(@RequestBody CommentRequest commentRequest) {
+    public ResponseEntity<Comment> create(
+            @PathVariable("postId") Long postId,
+            @RequestBody CommentRequest commentRequest) {
         Comment comment = CommentWebConverter.convertFrom(commentRequest);
-        return CommentWebConverter.convertFrom(commentService.create(comment));
+        commentService.create(postId, comment);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping
+    public List<CommentResponse> create(
+            @PathVariable("postId") Long postId) {
+        return CommentWebConverter.convertFrom(postService.findPost(postId).getComments());
     }
 }

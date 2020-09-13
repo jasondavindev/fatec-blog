@@ -1,5 +1,6 @@
 package fatec.projects.app.blog.domain.post.service;
 
+import fatec.projects.app.blog.common.exception.NotFoundException;
 import fatec.projects.app.blog.domain.post.entity.Post;
 import fatec.projects.app.blog.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,9 @@ public class PostService {
 
     public List<Post> retrievePostsOfUser(Long userId) {
         return postRepository.findByUserId(userId).orElse(Collections.emptyList());
+    }
+
+    public Post findPost(Long postId) {
+        return postRepository.findById(postId).orElseThrow(() -> new NotFoundException("Post not found"));
     }
 }
