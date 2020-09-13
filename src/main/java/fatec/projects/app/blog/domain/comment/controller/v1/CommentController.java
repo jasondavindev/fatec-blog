@@ -5,6 +5,7 @@ import fatec.projects.app.blog.domain.comment.controller.v1.request.CommentReque
 import fatec.projects.app.blog.domain.comment.controller.v1.response.CommentResponse;
 import fatec.projects.app.blog.domain.comment.entity.Comment;
 import fatec.projects.app.blog.domain.comment.service.CommentService;
+import fatec.projects.app.blog.domain.post.entity.Post;
 import fatec.projects.app.blog.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,14 +25,16 @@ public class CommentController {
     public ResponseEntity<Comment> create(
             @PathVariable("postId") Long postId,
             @RequestBody CommentRequest commentRequest) {
+        Post post = postService.findPost(postId);
         Comment comment = CommentWebConverter.convertFrom(commentRequest);
-        commentService.create(postId, comment);
+        commentService.create(post, comment);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
-    public List<CommentResponse> create(
+    public List<CommentResponse> findComments(
             @PathVariable("postId") Long postId) {
-        return CommentWebConverter.convertFrom(postService.findPost(postId).getComments());
+        List<Comment> comments = postService.findPost(postId).getComments();
+        return CommentWebConverter.convertFrom(comments);
     }
 }
