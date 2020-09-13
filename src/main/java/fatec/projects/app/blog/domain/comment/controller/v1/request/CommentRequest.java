@@ -18,8 +18,4 @@ public class CommentRequest {
     @JsonProperty("user")
     @NotNull
     private Long userId;
-
-    @JsonProperty("post")
-    @NotNull
-    private Long postId;
 }
