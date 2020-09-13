@@ -10,3 +10,5 @@ spring:
     password: password
     locations: classpath:db/migration
     url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/blog
+  jpa:
+    show-sql: true
