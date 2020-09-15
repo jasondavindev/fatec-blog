@@ -22,8 +22,13 @@ public class PostController {
         return PostWebConverter.convertFrom(postService.create(post));
     }
 
-    @GetMapping("/{userId}")
-    public List<PostResponse> retrievePosts(@PathVariable("userId") Long userId) {
+    @GetMapping("/user/{userId}")
+    public List<PostResponse> retrievePostsByUserId(@PathVariable("userId") Long userId) {
         return PostWebConverter.convertFrom(postService.retrievePostsOfUser(userId));
+    }
+
+    @GetMapping("/{postId}")
+    public PostResponse retrievePostsById(@PathVariable("postId") Long postId) {
+        return PostWebConverter.convertFrom(postService.findPost(postId));
     }
 }
