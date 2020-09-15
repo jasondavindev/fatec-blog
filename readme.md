@@ -1,4 +1,4 @@
-# Fatec Blog (Disciplina Padroes Projeto 4o BD)
+# Fatec Blog
 - Jason Carneiro
 - Marcos Toledo
 - Nicolas Fujisawa
