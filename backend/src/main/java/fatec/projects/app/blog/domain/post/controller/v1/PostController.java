@@ -22,7 +22,7 @@ public class PostController {
         return PostWebConverter.convertFrom(postService.create(post));
     }
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/user/{userId}")
     public List<PostResponse> getUserPosts(@PathVariable("userId") Long userId) {
         return PostWebConverter.convertFrom(postService.retrievePostsOfUser(userId));
     }
