@@ -27,8 +27,8 @@ public class PostController {
         return PostWebConverter.convertFrom(postService.retrievePostsOfUser(userId));
     }
 
-    @GetMapping("/users/{userId}")
-    public PostResponse retrievePostsById(@PathVariable("postId") Long postId) {
+    @GetMapping("/{postId}")
+    public PostResponse retrievePostById(@PathVariable("postId") Long postId) {
         return PostWebConverter.convertFrom(postService.findPost(postId));
     }
 }
