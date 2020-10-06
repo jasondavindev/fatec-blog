@@ -15,7 +15,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User retrieve(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
+    public User findByName(String name) {
+        return userRepository.findByName(name).orElseThrow(this::userNotFoundException);
+    }
+
+    private NotFoundException userNotFoundException() {
+        return new NotFoundException("User not found");
     }
 }
