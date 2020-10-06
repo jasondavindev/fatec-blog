@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/{userId}")
-    public UserDto retrieve(@PathVariable("userId") Long userId) {
-        return UserWebConverter.convertFrom(userService.retrieve(userId));
+    @GetMapping("/{username}")
+    public UserDto findByName(@PathVariable("username") String username) {
+        return UserWebConverter.convertFrom(userService.findByName(username));
     }
 
     @PostMapping
