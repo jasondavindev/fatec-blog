@@ -1,13 +1,25 @@
 <template>
-  <div class="hello">
-    <b-alert show>Default Alert</b-alert>
-
-    <b-alert variant="success" show>Success Alert</b-alert>
+  <div>
+    <PostForm></PostForm>
+    <PostView></PostView>
+    <UserRegister></UserRegister>
+    <UserLogin></UserLogin>
   </div>
 </template>
 
 <script>
+import PostForm from './PostForm';
+import PostView from './PostView';
+import UserRegister from './UserRegister';
+import UserLogin from './UserLogin';
+
 export default {
+  components: {
+    PostForm,
+    PostView,
+    UserRegister,
+    UserLogin,
+  },
   name: 'HelloWorld',
   data() {
     return {
@@ -19,7 +31,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
