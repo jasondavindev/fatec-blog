@@ -6,6 +6,8 @@ import fatec.projects.app.blog.domain.post.controller.v1.response.PostResponse;
 import fatec.projects.app.blog.domain.post.entity.Post;
 import fatec.projects.app.blog.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +19,11 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping()
-    public PostResponse createPost(@RequestBody PostRequest postRequest) {
+    public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest postRequest) {
         Post post = PostWebConverter.convertFrom(postRequest);
-        return PostWebConverter.convertFrom(postService.create(post));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(PostWebConverter.convertFrom(postService.create(post)));
     }
 
     @GetMapping("/user/{userId}")

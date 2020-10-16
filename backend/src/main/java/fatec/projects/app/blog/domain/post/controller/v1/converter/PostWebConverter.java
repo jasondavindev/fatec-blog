@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class PostWebConverter {
     public static PostResponse convertFrom(Post post) {
         return PostResponse.builder()
+                .id(post.getId())
                 .title(post.getTitle())
                 .description(post.getDescription())
                 .build();
