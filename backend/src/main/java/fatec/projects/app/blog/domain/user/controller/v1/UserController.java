@@ -1,6 +1,7 @@
 package fatec.projects.app.blog.domain.user.controller.v1;
 
 import fatec.projects.app.blog.domain.user.controller.v1.converter.UserWebConverter;
+import fatec.projects.app.blog.domain.user.controller.v1.request.UserLoginRequestDto;
 import fatec.projects.app.blog.domain.user.controller.v1.response.UserResponse;
 import fatec.projects.app.blog.domain.user.dto.UserDto;
 import fatec.projects.app.blog.domain.user.entity.User;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -27,5 +30,11 @@ public class UserController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(UserWebConverter.convertFromUserToResponse(createdUser));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserResponse> login(@RequestBody @Valid UserLoginRequestDto userLoginRequestDto) {
+        User user = userService.userLogin(userLoginRequestDto);
+        return ResponseEntity.ok(UserWebConverter.convertFromUserToResponse(user));
     }
 }

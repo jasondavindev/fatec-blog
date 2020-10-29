@@ -1,6 +1,7 @@
 package fatec.projects.app.blog.domain.user.service;
 
 import fatec.projects.app.blog.common.exception.NotFoundException;
+import fatec.projects.app.blog.domain.user.controller.v1.request.UserLoginRequestDto;
 import fatec.projects.app.blog.domain.user.entity.User;
 import fatec.projects.app.blog.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,10 @@ public class UserService {
 
     public User findByName(String name) {
         return userRepository.findByName(name).orElseThrow(this::userNotFoundException);
+    }
+
+    public User userLogin(UserLoginRequestDto user) {
+        return userRepository.findByEmail(user.getEmail()).orElseThrow(this::userNotFoundException);
     }
 
     private NotFoundException userNotFoundException() {
