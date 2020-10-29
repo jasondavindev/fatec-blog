@@ -1,29 +1,19 @@
 <template>
-  <div class="m-4 text-left">
-    <b-card>
-      <div>
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.description }}</p>
+  <b-card :title="title" v-if="loaded" class="text-left">
+    <div class="post-content">
+      <p>{{ description }}</p>
+    </div>
+
+    <div class="post-comments" v-if="comments.length">
+      <h4>Commentários</h4>
+      <div class="comment-card" v-for="(comment, key) in comments" :key="key">
+        <CommentCard
+          :user="comment.userName"
+          :commentary="comment.commentary"
+        ></CommentCard>
       </div>
-    </b-card>
-    <b-card>
-      <div>
-        <h3 class="mt-3">Comentários</h3>
-        <div class="post-comments mt-4">
-          <div
-            class="comment-card"
-            v-for="(comment, index) in post.comments"
-            :key="index"
-          >
-            <CommentCard
-              :user="comment.userName"
-              :commentary="comment.commentary"
-            ></CommentCard>
-          </div>
-        </div>
-      </div>
-    </b-card>
-  </div>
+    </div>
+  </b-card>
 </template>
 
 <script>
@@ -31,49 +21,68 @@ import BlogApi from '../services/api';
 import CommentCard from './CommentCard';
 
 export default {
+  name: 'PostView',
+
   components: {
     CommentCard,
   },
+
   data() {
     return {
-      postId: 1,
-      user: 1,
-      post: {
-        title: '',
-        description: '',
-        comments: [],
-      },
+      comments: [],
+      id: null,
+      title: null,
+      description: null,
+      loaded: false,
     };
-  },
-  methods: {
-    async getPost(postId) {
-      try {
-        const { data } = await BlogApi.getPost(postId);
-        return data;
-      } catch (error) {
-        return console.error(error);
-      }
-    },
-    async getComments(postId) {
-      try {
-        const { data } = await BlogApi.getComments(postId);
-        return data;
-      } catch (error) {
-        return console.error(error);
-      }
-    },
   },
 
   async mounted() {
-    const post = await this.getPost(this.postId);
-    const comments = await this.getComments(this.postId);
+    await this.loadPost();
+    await this.getComments();
+  },
 
-    this.post.title = post.title;
-    this.post.description = post.description;
-    this.post.comments = comments;
+  methods: {
+    setDatas({ id, title, description }) {
+      this.id = id;
+      this.title = title;
+      this.description = description;
+    },
+
+    async loadPost() {
+      try {
+        const {
+          data: { id, title, description },
+        } = await BlogApi.getPost({ id: this.$route.params.id });
+
+        this.setDatas({ id, title, description });
+        this.loaded = true;
+      } catch (error) {
+        alert('Ocorreu algum erro ao carregar seu post');
+      }
+    },
+
+    async getComments() {
+      try {
+        const { data: comments } = await BlogApi.getComments({ id: this.id });
+
+        this.comments = comments;
+      } catch (error) {
+        alert('Ocorreu um erro inesperado ao carregar seu Post');
+      }
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
+  .post-comments {
+    border: solid 1px rgba(0,0,0,0.05);
+    border-radius: 3px;
+    padding: 12px;
+  }
+
+  .post-comments h4 {
+    font-size: 18px;
+  }
 </style>

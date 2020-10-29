@@ -1,7 +1,7 @@
 <template>
   <div>
     <PostForm></PostForm>
-    <PostView></PostView>
+    <PostItem></PostItem>
     <UserRegister></UserRegister>
     <UserLogin></UserLogin>
   </div>
@@ -9,14 +9,14 @@
 
 <script>
 import PostForm from './PostForm';
-import PostView from './PostView';
+import PostItem from './PostItem';
 import UserRegister from './UserRegister';
 import UserLogin from './UserLogin';
 
 export default {
   components: {
     PostForm,
-    PostView,
+    PostItem,
     UserRegister,
     UserLogin,
   },

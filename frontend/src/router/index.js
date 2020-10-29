@@ -11,5 +11,20 @@ export default new Router({
       name: 'HelloWorld',
       component: HelloWorld,
     },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('@/views/Login'),
+    },
+    {
+      path: '/posts',
+      name: 'Posts',
+      component: () => import('@/views/Posts'),
+    },
+    {
+      path: '/posts/:id',
+      name: 'PostView',
+      component: () => import('@/components/PostView'),
+    },
   ],
 });
