@@ -17,6 +17,13 @@ export default {
     return axiosInstance.get(`/v1/posts/${id}/comments`);
   },
 
+  async createComment({ commentary, post, user: userId }) {
+    return axiosInstance.post(`/v1/posts/${post}/comments`, {
+      userId,
+      commentary,
+    });
+  },
+
   async createUser({ name, email }) {
     return axiosInstance.post('/v1/users', { name, email });
   },
@@ -27,5 +34,9 @@ export default {
 
   async userPosts({ id }) {
     return axiosInstance.get(`/v1/posts/user/${id}`);
+  },
+
+  async getAllPosts() {
+    return axiosInstance.get('/v1/posts');
   },
 };

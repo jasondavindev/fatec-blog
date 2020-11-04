@@ -12,6 +12,10 @@
           <b-button type="submit" variant="outline-primary">Registrar</b-button>
         </div>
       </b-form>
+
+      <b-alert v-model="created" class="mt-3" variant="success"
+        >Cadastrado com sucesso!</b-alert
+      >
     </b-card>
   </div>
 </template>
@@ -24,6 +28,7 @@ export default {
     return {
       name: '',
       email: '',
+      created: false,
     };
   },
   methods: {
@@ -44,10 +49,15 @@ export default {
           email: this.email,
         });
 
-        return data;
+        this.created = true;
+        setTimeout(this.redirectToLogin, 1000);
       } catch (error) {
         return console.error(error);
       }
+    },
+
+    redirectToLogin() {
+      this.$router.push({ name: 'Login' });
     },
   },
 };

@@ -1,26 +1,32 @@
 <template>
   <div class="m-4 text-left">
-    <b-card title="Criar um post">
+    <b-card title="Criar post">
       <b-form @submit.prevent="onSubmit">
         <div>
           <b-form-input v-model="postTitle" placeholder="Título"></b-form-input>
         </div>
         <div class="mt-2">
           <b-form-textarea
-            id="textarea"
+            id="post-content"
             v-model="postContent"
             placeholder="Escreva seus post"
             rows="3"
             max-rows="6"
           ></b-form-textarea>
         </div>
-        <div class="mt-3">
+        <div class="mt-3" v-if="!sent">
           <b-button type="submit" variant="outline-primary"
             >Criar post</b-button
           >
         </div>
       </b-form>
     </b-card>
+
+    <div class="mt-2">
+      <b-alert variant="success" v-model="created"
+        >Post criado com sucesso!</b-alert
+      >
+    </div>
   </div>
 </template>
 
@@ -32,6 +38,8 @@ export default {
     return {
       postTitle: '',
       postContent: '',
+      created: false,
+      sent: false,
     };
   },
   methods: {
@@ -42,6 +50,8 @@ export default {
     },
 
     async createPost() {
+      this.sent = true;
+
       try {
         const { data } = await BlogApi.createPost({
           user: 1,
@@ -49,14 +59,19 @@ export default {
           description: this.postContent,
         });
 
-        console.log(data);
+        this.created = true;
+        setTimeout(this.redirectToPosts, 1000);
       } catch (error) {
-        console.error(error);
+        this.sent = false;
       }
     },
 
     validatePost() {
       return this.postTitle && this.postContent;
+    },
+
+    redirectToPosts() {
+      this.$router.push({ name: 'Posts' });
     },
   },
 };
