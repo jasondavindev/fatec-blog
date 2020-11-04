@@ -35,4 +35,9 @@ public class PostController {
     public PostResponse retrievePostById(@PathVariable("postId") Long postId) {
         return PostWebConverter.convertFrom(postService.findPost(postId));
     }
+
+    @GetMapping()
+    public List<PostResponse> getAllPosts() {
+        return PostWebConverter.convertFrom(postService.findAllPosts());
+    }
 }
