@@ -4,6 +4,7 @@ import fatec.projects.app.blog.common.exception.NotFoundException;
 import fatec.projects.app.blog.domain.post.entity.Post;
 import fatec.projects.app.blog.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -24,5 +25,9 @@ public class PostService {
 
     public Post findPost(Long postId) {
         return postRepository.findById(postId).orElseThrow(() -> new NotFoundException("Post not found"));
+    }
+
+    public List<Post> findAllPosts() {
+        return postRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 }
