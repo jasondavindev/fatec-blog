@@ -29,5 +29,9 @@ export default new Vuex.Store({
 
       console.log('[STORE] User set', { id, email, name });
     },
+
+    clearSession({ state }) {
+      state.user = {};
+    },
   },
 });

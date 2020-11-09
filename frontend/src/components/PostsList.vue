@@ -1,5 +1,8 @@
 <template>
-  <div class="mt-3 text-left">
+  <div class="mt-3">
+    <b-card class="text-center" v-if="!posts.length">
+      <h4>Que triste ... Não há nenhum post no momento ;-(</h4>
+    </b-card>
     <div v-for="(post, key) in posts" :key="key" class="post-item">
       <PostItem
         :id="post.id"
@@ -33,14 +36,14 @@ export default {
   },
 
   async mounted() {
-    await this.getUserPosts();
+    await this.getPosts();
   },
 
   methods: {
-    async getUserPosts() {
+    async getPosts() {
       try {
         const { id } = this.user;
-        const { data: posts } = await BlogApi.userPosts({ id });
+        const { data: posts } = await BlogApi.getAllPosts();
         this.posts = posts;
       } catch (error) {
         alert('Ocorreu um erro');

@@ -1,9 +1,8 @@
 <template>
-  <div class="mt-3">
-    <h2>{{ title }}</h2>
+  <b-card :title="title">
     <p class="post-content">{{ description }}</p>
     <b-button variant="outline-primary" @click="openPost">Abrir post</b-button>
-  </div>
+  </b-card>
 </template>
 
 <script>
@@ -19,6 +18,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

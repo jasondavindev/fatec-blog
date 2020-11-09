@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HelloWorld from '@/components/HelloWorld';
 
 Vue.use(Router);
 
@@ -8,8 +7,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld,
+      name: 'Home',
+      component: () => import('@/views/Home'),
     },
     {
       path: '/login',
@@ -25,6 +24,11 @@ export default new Router({
       path: '/posts/:id',
       name: 'PostView',
       component: () => import('@/components/PostView'),
+    },
+    {
+      path: '/post/create',
+      name: 'PostCreate',
+      component: () => import('@/views/PostCreate'),
     },
   ],
 });
