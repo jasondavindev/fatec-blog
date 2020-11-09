@@ -2,7 +2,19 @@
 - Jason Carneiro
 - Marcos Toledo
 
-## Rodando a aplicação
+## Contexto aplicação
+Este aplicação consiste em um mini-blog, onde é possível criar usuários, posts e comentários.
+
+Todas as rotas estão contidas no arquivo `Fatec-blog.postman_collection`. Você pode importar no Postman para visualizar.
+
+## Tecnologias
+- Java 11
+- Spring Boot
+- Docker & Docker compose
+- MySQL
+- Vue.js 2.x
+
+## Rodando a aplicação backend
 
 É necessário ter instalado o make
 
@@ -20,3 +32,17 @@ make run
 ```
 
 Agora a aplicação está rodando na porta 8080.
+
+## Rodando aplicação frontend
+
+É necessário instalar todas as dependências executando:
+
+```bash
+yarn install
+```
+
+Execute a aplicação passando a porta:
+
+```bash
+PORT=3000 yarn dev
+```
