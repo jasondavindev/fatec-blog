@@ -1,4 +1,4 @@
-# Fatec Blog
+# Fatec Blog - Padrões de Projeto de Sistemas
 - Jason Carneiro
 - Marcos Toledo
 
