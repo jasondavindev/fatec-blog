@@ -7,6 +7,13 @@ Este aplicação consiste em um mini-blog, onde é possível criar usuários, po
 
 Todas as rotas estão contidas no arquivo `Fatec-blog.postman_collection`. Você pode importar no Postman para visualizar.
 
+## Em ação
+
+![Create user](assets/user_creation.gif)
+![Create post](assets/post_creation.gif)
+![Open post](assets/opening_posts.gif)
+![Comment](assets/commenting.gif)
+
 ## Tecnologias
 - Java 11
 - Spring Boot
